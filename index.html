@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ร้านทดลอง</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f4fb;--card:#fff;--tx:#12142a;--mut:#6b7090;--bd:#e4e6f4;--pr:#6d5efc;--pr2:#22c3e6;--warm:#ff7a59;--good:#12915f;--bad:#e5484d;--wbg:#fff3d1;--wtx:#7a4a06;--r:20px;--sh:0 1px 2px rgba(18,20,42,.04),0 10px 26px -14px rgba(18,20,42,.22);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@supports (color:color-mix(in srgb,red,blue)){:root{--pr2:color-mix(in srgb,var(--pr) 40%,#22d3ee)}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0d1c;--card:#121730;--tx:#eceefb;--mut:#8e94b8;--bd:#232b4d;--good:#3ddc97;--wbg:#3a2d0c;--wtx:#f6d58a;--sh:0 1px 2px rgba(0,0,0,.3),0 12px 30px -16px rgba(0,0,0,.7)}}
+:root[data-theme="dark"]{--bg:#0a0d1c;--card:#121730;--tx:#eceefb;--mut:#8e94b8;--bd:#232b4d;--good:#3ddc97;--wbg:#3a2d0c;--wtx:#f6d58a;--sh:0 1px 2px rgba(0,0,0,.3),0 12px 30px -16px rgba(0,0,0,.7)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 "Prompt",system-ui,-apple-system,"Noto Sans Thai","Sarabun",sans-serif;padding-bottom:104px;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(60% 38% at 92% 0%,color-mix(in srgb,var(--pr) 22%,transparent),transparent),radial-gradient(50% 32% at 0% 34%,rgba(34,211,238,.12),transparent)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--card);border-bottom:1px solid var(--bd)}
+@supports (backdrop-filter:blur(1px)) and (color:color-mix(in srgb,red,blue)){header{background:color-mix(in srgb,var(--card) 76%,transparent);backdrop-filter:saturate(1.5) blur(16px);-webkit-backdrop-filter:saturate(1.5) blur(16px)}}
+.logo{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:600;user-select:none;-webkit-user-select:none;cursor:pointer;padding:2px 0}
+.mark{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px;background:linear-gradient(135deg,var(--pr),var(--pr2))}
+.bal{font-weight:600;font-variant-numeric:tabular-nums;padding:6px 13px;border-radius:99px;background:var(--bg);border:1px solid var(--bd);cursor:pointer;transition:color .3s,border-color .3s}
+.bal.bump{color:var(--good);border-color:var(--good)}
+main{padding:14px 16px;max-width:760px;margin:0 auto}
+@keyframes rise{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes drift{to{transform:translate(-40px,30px) scale(1.15)}}
+@keyframes float{50%{transform:translateY(-10px) rotate(6deg)}}
+@keyframes sheen{0%,55%{transform:translateX(-60%)}100%{transform:translateX(60%)}}
+@keyframes pop{0%{transform:scale(.3)}60%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes lift{from{transform:scale(.8)}to{transform:translateY(-2px)}}
+@keyframes fade{from{opacity:0}}
+@keyframes sheet{from{transform:translateY(100%)}}
+@keyframes toast{from{opacity:0;transform:translate(-50%,16px) scale(.9)}}
+#app.go main>*:not(.grid){animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+#app.go main>*:nth-child(2){animation-delay:.05s}#app.go main>*:nth-child(3){animation-delay:.1s}#app.go main>*:nth-child(n+4){animation-delay:.15s}
+#app.go .grid>*{animation:rise .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*60ms + 120ms)}
+#app.go nav button.on i{animation:lift .45s cubic-bezier(.3,1.6,.5,1) both}
+.hero{position:relative;overflow:hidden;isolation:isolate;border-radius:28px;padding:30px 22px 34px;margin-bottom:6px;color:#fff;background:linear-gradient(135deg,var(--pr),var(--pr2))}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(28px);z-index:-1;animation:drift 12s ease-in-out infinite alternate}
+.hero::before{width:230px;height:230px;background:rgba(255,255,255,.3);top:-80px;right:-50px}
+.hero::after{width:190px;height:190px;background:rgba(255,122,89,.55);bottom:-80px;left:-30px;animation-duration:16s;animation-direction:alternate-reverse}
+.hero h1{margin:0 0 6px;font-size:28px;line-height:1.15;font-weight:700;letter-spacing:-.01em;max-width:72%}
+.hero p{margin:0;opacity:.92;max-width:72%}
+.hero .fl{position:absolute;font-size:46px;animation:float 4.5s ease-in-out infinite;filter:drop-shadow(0 8px 12px rgba(0,0,0,.25))}
+.hero .a{right:84px;bottom:12px;font-size:34px;animation-delay:-2s}.hero .b{right:20px;top:26px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:var(--r);padding:12px;box-shadow:var(--sh)}
+.pc{display:flex;flex-direction:column;gap:2px;transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s,border-color .25s}
+.pc:active{transform:scale(.98)}
+@media(hover:hover){.pc:hover{transform:translateY(-4px);border-color:var(--pr)}.pc:hover .pw img,.pc:hover .pw .em{transform:scale(1.07)}}
+.pw{position:relative;overflow:hidden;border-radius:14px;cursor:pointer;margin-bottom:8px}
+.pw img,.pw .em{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.pw.big{max-width:420px;margin:0 auto 4px}
+.pic{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--bg)}
+.em{aspect-ratio:1/1;display:grid;place-items:center;font-size:56px;background:var(--bg)}
+.tag{position:absolute;top:8px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px;color:#fff}
+.tag.hot{left:8px;background:var(--warm)}.tag.fast{right:8px;background:rgba(10,13,28,.7)}
+.nm{font-weight:600;line-height:1.3;cursor:pointer}
+.pz{font-size:17px;font-weight:600}.pz s{color:var(--mut);font-size:13px;font-weight:400;margin-left:4px}
+.mut{color:var(--mut);font-size:13px}
+.btn{position:relative;overflow:hidden;display:block;width:100%;margin-top:8px;padding:12px;border:0;border-radius:14px;background:linear-gradient(135deg,var(--pr),var(--pr2));color:#fff;font:inherit;font-weight:600;cursor:pointer;box-shadow:0 10px 22px -12px var(--pr);transition:transform .15s,filter .2s}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%)}
+@media(hover:hover){.btn:hover{filter:brightness(1.07)}.btn:hover::after{transform:translateX(120%);transition:transform .7s}}
+.btn:active{transform:scale(.96)}.btn:disabled{opacity:.4;box-shadow:none}
+.btn.alt{background:transparent;color:var(--tx);border:1px solid var(--bd);box-shadow:none}.btn.alt::after{display:none}
+.btn.red{background:var(--bad);box-shadow:none}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--pr);outline-offset:2px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:11px 0;border-bottom:1px solid var(--bd)}
+.row:last-child{border:0}
+.qty{display:flex;align-items:center;gap:10px;font-weight:600}
+.qty button{width:32px;height:32px;border-radius:50%;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font-size:16px;cursor:pointer;transition:transform .15s}.qty button:active{transform:scale(.85)}
+h2{margin:6px 0 10px;font-size:19px;font-weight:600}h3{margin:0 0 8px;font-weight:600}
+input,select,textarea{width:100%;padding:12px;margin:4px 0;border-radius:14px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font:inherit}
+input[type=color]{padding:2px;height:46px}
+nav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));max-width:480px;margin:0 auto;display:flex;padding:6px;border-radius:26px;background:var(--card);border:1px solid var(--bd);box-shadow:var(--sh),0 16px 32px -14px rgba(0,0,0,.35);z-index:6}
+nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 0;border:0;background:none;color:var(--mut);font:inherit;font-size:11px;cursor:pointer}
+nav i{position:relative;display:grid;place-items:center;width:48px;height:30px;border-radius:15px;transition:background .25s,color .25s,transform .3s cubic-bezier(.3,1.6,.5,1)}
+nav button.on{color:var(--tx);font-weight:600}nav button.on i{background:linear-gradient(135deg,var(--pr),var(--pr2));color:#fff;transform:translateY(-2px)}
+nav button:active i{transform:scale(.88)}
+nav em{position:absolute;top:-5px;right:2px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--warm);color:#fff;font:600 11px/18px "Prompt",system-ui;font-style:normal;text-align:center}
+em.pop{animation:pop .45s cubic-bezier(.3,1.8,.5,1)}
+.wcard{position:relative;overflow:hidden;isolation:isolate;border-radius:26px;padding:22px 20px;color:#fff;background:linear-gradient(135deg,var(--pr),var(--pr2));box-shadow:0 20px 40px -20px var(--pr)}
+.wcard::after{content:"";position:absolute;inset:-40% -60%;z-index:-1;background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.3) 50%,transparent 58%);animation:sheen 5s ease-in-out infinite}
+.wcard .lbl{opacity:.85;font-size:13px}.wcard .amt{font-size:34px;font-weight:700;margin:2px 0 6px;font-variant-numeric:tabular-nums}
+.wcard .cid{margin-top:16px;font:500 15px ui-monospace,Menlo,monospace;letter-spacing:2px;opacity:.92}
+.idbox{font:600 20px/1.2 ui-monospace,Menlo,monospace;letter-spacing:2px;text-align:center;padding:14px;background:var(--bg);border:1px dashed var(--bd);border-radius:14px;margin:8px 0}
+.cr{color:var(--good)}.dr{color:var(--bad)}
+#dlg,#adm{position:fixed;inset:0;z-index:20}
+#dlg{background:rgba(6,8,20,.55);display:flex;align-items:flex-end;justify-content:center;animation:fade .25s}
+#dlg[hidden],#adm[hidden]{display:none}
+.sheet{background:var(--card);width:100%;max-width:520px;border-radius:26px 26px 0 0;padding:20px 16px calc(18px + env(safe-area-inset-bottom,0px));max-height:90%;overflow:auto;animation:sheet .38s cubic-bezier(.2,.9,.3,1)}
+#adm{background:var(--bg);overflow:auto;padding-top:env(safe-area-inset-top,0px);animation:fade .25s}
+.tabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto}
+.tabs button{flex:none;padding:8px 16px;border-radius:99px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;cursor:pointer;transition:background .2s}
+.tabs button.on{background:linear-gradient(135deg,var(--pr),var(--pr2));color:#fff;border-color:transparent}
+.thumb{width:48px;height:48px;object-fit:cover;border-radius:10px}
+.warn{background:var(--wbg);color:var(--wtx);border-radius:14px;padding:10px 12px;font-size:13px;margin-bottom:12px}
+#toast{position:fixed;left:50%;bottom:104px;transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:10px 18px;border-radius:99px;z-index:30;font-size:14px;max-width:90%;box-shadow:0 12px 30px -10px rgba(0,0,0,.5);animation:toast .4s cubic-bezier(.2,1.4,.4,1)}
+#toast[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="adm" hidden></div>
+<div id="dlg" hidden></div>
+<div id="toast" hidden></div>
+<script>
+const KEY='shop_demo_v1';
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const baht=s=>'฿'+(s/100).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});
+const uid=()=>(crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2));
+const dt=t=>new Date(t).toLocaleString('th-TH',{dateStyle:'short',timeStyle:'short'});
+function code12(){let s='';while(s.length<12){const b=new Uint8Array(16);crypto.getRandomValues(b);for(const x of b){if(x<250&&s.length<12)s+=x%10}}return s}
+const okImg=s=>typeof s==='string'&&/^data:image\/(jpeg|svg\+xml)[;,]/.test(s)&&s.length<600000;
+const art=(e,c)=>'data:image/svg+xml;utf8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="${c}"/><circle cx="100" cy="100" r="72" fill="#fff" fill-opacity=".35"/><text x="100" y="128" font-size="84" text-anchor="middle">${e}</text></svg>`);
+const mkc=n=>Array.from({length:n},()=>{const a=code12();return 'DEMO-'+a.slice(0,4)+'-'+a.slice(4,8)+'-'+a.slice(8)});
+const parseCodes=t=>[...new Set(String(t).split('\n').map(x=>x.trim().slice(0,200)).filter(Boolean))].slice(0,2000);
+const SAMPLES=()=>[
+ {id:uid(),name:'สมุดโน้ต A5',emoji:'📒',price:12900,sale:9900,stock:20,on:true,img:art('📒','#7fb7ae'),desc:'สมุดปกอ่อนขนาด A5 เหมาะกับจดงานและวางแผนรายวัน'},
+ {id:uid(),name:'ปากกาเจล 3 ด้าม',emoji:'🖊️',price:5900,sale:null,stock:50,on:true,img:art('🖊️','#8fa8d6'),desc:'ปากกาเจลหมึกดำ 3 ด้ามต่อแพ็ก'},
+ {id:uid(),name:'แก้วเซรามิก',emoji:'☕',price:18900,sale:null,stock:8,on:true,img:art('☕','#e9b872'),desc:'แก้วเซรามิกสำหรับชา กาแฟ และเครื่องดื่มร้อน'},
+ {id:uid(),name:'กระเป๋าผ้า',emoji:'👜',price:24900,sale:19900,stock:5,on:true,img:art('👜','#d98f8f'),desc:'กระเป๋าผ้าสำหรับใส่ของใช้ประจำวัน'},
+ {id:uid(),name:'โค้ดเติมเพชร 100 💎',emoji:'💎',price:9900,sale:null,stock:5,on:true,digital:true,codes:mkc(5),img:art('💎','#6fa8dc'),desc:'โค้ดเติมเพชร 100 💎 (ข้อมูลตัวอย่างสำหรับทดสอบระบบ)\nชำระแล้วได้รับรหัสทันที นำไปกรอกในหน้าเติมเงินของเกม'},
+ {id:uid(),name:'ไอดีเกมสุ่ม (ตัวอย่าง)',emoji:'🎮',price:19900,sale:14900,stock:3,on:true,digital:true,codes:mkc(3),img:art('🎮','#9b8fd6'),desc:'ไอดีเกมสุ่ม 1 บัญชีต่อ 1 ชิ้น (ข้อมูลตัวอย่างสำหรับทดสอบระบบ)\nได้รับข้อมูลเข้าสู่ระบบทันทีหลังชำระ'}];
+const pic=p=>okImg(p.img)?`<img class="pic" src="${p.img}" alt="${esc(p.name)}" loading="lazy">`:`<div class="em">${esc(p.emoji)}</div>`;
+function shrink(file){return new Promise((res,rej)=>{if(!file||!/^image\//.test(file.type))return rej(new Error('ไฟล์ต้องเป็นรูปภาพ'));const u=URL.createObjectURL(file),im=new Image();im.onload=()=>{const k=Math.min(1,640/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL('image/jpeg',.8))};im.onerror=()=>{URL.revokeObjectURL(u);rej(new Error('เปิดรูปไม่ได้'))};im.src=u})}
+const seed=()=>({v:1,customers:{},me:null,carts:{},orders:[],admin:null,
+ settings:{name:'ร้านทดลอง',tag:'ไอเทมเกมและของใช้ ชำระแล้วรับรหัสทันที',color:'#6d5efc',bg:''},
+ products:SAMPLES()});
+let persist=true;
+function load(){try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);if(o&&o.v===1){if(o.settings&&o.settings.color==='#0f766e')o.settings.color='#6d5efc';return o}}}catch(e){persist=false}return seed()}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){persist=false}}
+let lastN=0,lastKey='',lastBal=null,curP=null,S=load(),view='home',adminOk=false,tab='topup',taps=[],pending=null;
+function me(){if(!S.me||!S.customers[S.me]){let id;do{id=code12()}while(S.customers[id]);S.customers[id]={id,created:Date.now(),balance:0,ledger:[]};S.me=id;save()}return S.customers[S.me]}
+const cartOf=()=>S.carts[S.me]||(S.carts[S.me]={});
+const prod=id=>S.products.find(p=>p.id===id);
+const pr=p=>p.sale!=null?p.sale:p.price;
+function post(c,type,dir,amount,o){const before=c.balance;if(dir==='DR'&&before<amount)throw new Error('ยอดเงินไม่พอ');const after=dir==='CR'?before+amount:before-amount;c.balance=after;c.ledger.unshift({id:uid(),type,dir,amount,before,after,at:Date.now(),...o})}
+function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>t.hidden=true,2600)}
+function dlg(h){$('#dlg').innerHTML='<div class="sheet">'+h+'</div>';$('#dlg').hidden=false}
+const closeDlg=()=>{$('#dlg').hidden=true};
+function copy(txt,m){const ok=()=>toast(m||'คัดลอกรหัสบัญชีเรียบร้อยแล้ว');if(navigator.clipboard)navigator.clipboard.writeText(txt).then(ok,fb);else fb();function fb(){const a=document.createElement('textarea');a.value=txt;document.body.appendChild(a);a.select();try{document.execCommand('copy');ok()}catch(e){toast('คัดลอกไม่ได้ กดค้างที่เลขเพื่อคัดลอกเอง')}a.remove()}}
+function theme(){const s=S.settings;document.documentElement.style.setProperty('--pr',s.color);document.body.style.background=s.bg||'';document.title=s.name}
+const totals=()=>{let t=0,n=0;const c=cartOf();for(const id in c){const p=prod(id);if(p&&p.on){t+=pr(p)*c[id];n+=c[id]}}return{t,n}};
+
+const IC={home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',cart:'<circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.5 12h11L21 7H6"/>',wallet:'<rect x="3" y="7" width="18" height="13" rx="3"/><path d="M3 11V6a2 2 0 0 1 2-2h12M16 14.5h2"/>',account:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'};
+function countBal(to){const el=$('#bal'),from=lastBal;lastBal=to;if(!el||from===null||from===to||(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches))return;const t0=performance.now();el.classList.add('bump');(function f(t){const k=Math.min(1,(t-t0)/700),e=1-Math.pow(1-k,3);el.textContent=baht(Math.round(from+(to-from)*e));if(k<1)requestAnimationFrame(f);else el.classList.remove('bump')})(t0)}
+function card(p,i){const off=p.sale!=null&&p.price>0?Math.round((1-p.sale/p.price)*100):0;return `<div class="card pc" style="--i:${i||0}"><div class="pw" data-a="open" data-id="${p.id}">${pic(p)}${off?`<span class="tag hot">−${off}%</span>`:''}${p.digital?'<span class="tag fast">⚡ ส่งทันที</span>':''}</div><div class="nm" data-a="open" data-id="${p.id}">${esc(p.name)}</div><div class="pz"><b>${baht(pr(p))}</b>${p.sale!=null?`<s>${baht(p.price)}</s>`:''}</div><div class="mut">${p.stock>0?'เหลือ '+p.stock+' ชิ้น':'สินค้าหมด'}</div><button class="btn" data-a="add" data-id="${p.id}" ${p.stock>0?'':'disabled'}>เพิ่มลงตะกร้า</button></div>`}
+function ledgerHtml(c,n){const l=c.ledger.slice(0,n||20);return l.length?l.map(x=>`<div class="row"><div><div>${esc(x.type.replace('_',' '))}</div><div class="mut">${dt(x.at)}${x.reason?' · '+esc(x.reason):''}</div></div><b class="${x.dir==='CR'?'cr':'dr'}">${x.dir==='CR'?'+':'−'}${baht(x.amount)}</b></div>`).join(''):'<p class="mut">ยังไม่มีรายการ</p>'}
+function render(){
+  const c=me(),s=S.settings,tt=totals();let h='';const key=view+(view==='prod'?curP:''),go=key!==lastKey;lastKey=key;
+  h+=`<header><div class="logo" data-a="logo"><span class="mark">${esc([...s.name][0]||'S')}</span>${esc(s.name)}</div><div class="bal" id="bal" data-a="nav" data-id="wallet">${baht(c.balance)}</div></header><main>`;
+  if(!persist)h+='<div class="warn">เบราว์เซอร์นี้บันทึกข้อมูลไม่ได้ (เช่นโหมดส่วนตัว) รหัสบัญชีจะเปลี่ยนเมื่อรีเฟรช</div>';
+  if(view==='home'){
+    h+=`<div class="hero"><span class="fl a">💎</span><span class="fl b">🎮</span><h1>${esc(s.name)}</h1><p>${esc(s.tag)}</p></div><h2 style="margin:18px 2px 10px">สินค้าทั้งหมด</h2><div class="grid">${S.products.filter(p=>p.on).map(card).join('')||'<p class="mut">ยังไม่มีสินค้า</p>'}</div>`;
+  }else if(view==='prod'){
+    const p=prod(curP),back='<button class="btn alt" style="width:auto;margin:0 0 10px;padding:8px 14px" data-a="back">← กลับ</button>';
+    if(!p||!p.on)h+=back+'<p class="mut">ไม่พบสินค้านี้</p>';
+    else{const inc=cartOf()[p.id]||0;
+      h+=`${back}<div class="card"><div class="pw big">${pic(p)}</div><h2 style="margin:12px 0 4px">${esc(p.name)}</h2>
+      <div style="font-size:22px">${p.sale!=null?`<s class="mut">${baht(p.price)}</s> `:''}<b>${baht(pr(p))}</b>${p.sale!=null&&p.price>0?` <span class="mut">ลด ${Math.round((1-p.sale/p.price)*100)}%</span>`:''}</div>
+      <div class="row"><span>สถานะ</span><b>${p.stock>0?'เหลือ '+p.stock+' ชิ้น':'สินค้าหมด'}</b></div>
+      <div class="row"><span>ประเภท</span><b>${p.digital?'ดิจิทัล · ได้รับรหัสทันทีหลังชำระ':'สินค้าทั่วไป'}</b></div>
+      <h3 style="margin-top:12px">รายละเอียดสินค้า</h3><div style="white-space:pre-wrap">${esc(p.desc||'ยังไม่มีรายละเอียดสินค้า')}</div>
+      ${inc?`<p class="mut">อยู่ในตะกร้าแล้ว ${inc} ชิ้น</p>`:''}
+      <button class="btn" data-a="add" data-id="${p.id}" ${p.stock>0?'':'disabled'}>เพิ่มลงตะกร้า</button><button class="btn alt" data-a="buynow" data-id="${p.id}" ${p.stock>0?'':'disabled'}>ซื้อเลย</button></div>`}
+  }else if(view==='cart'){
+    const cart=cartOf();let rows='';
+    for(const id in cart){const p=prod(id);if(!p||!p.on)continue;rows+=`<div class="row"><span>${esc(p.emoji)} ${esc(p.name)}</span><span class="qty"><button data-a="dec" data-id="${id}">−</button>${cart[id]}<button data-a="inc" data-id="${id}">+</button></span><b>${baht(pr(p)*cart[id])}</b></div>`}
+    h+=`<h2>ตะกร้า</h2><div class="card">${rows||'<p class="mut">ตะกร้าว่าง เลือกสินค้าจากหน้าแรกได้เลย</p>'}`;
+    if(rows)h+=`<div class="row"><b>รวม</b><b>${baht(tt.t)}</b></div><div class="mut">ยอดคงเหลือ ${baht(c.balance)}</div><button class="btn" data-a="checkout" ${c.balance<tt.t?'disabled':''}>${c.balance<tt.t?'ยอดเงินไม่พอ':'ชำระด้วย Wallet'}</button>`;
+    h+='</div>';
+  }else if(view==='wallet'){
+    const tu=c.ledger.filter(x=>x.type==='TOPUP_CREDIT').reduce((a,x)=>a+x.amount,0),sp=c.ledger.filter(x=>x.type==='PURCHASE_DEBIT').reduce((a,x)=>a+x.amount,0);
+    h+=`<h2>Wallet</h2><div class="wcard"><div class="lbl">ยอดคงเหลือ</div><div class="amt">${baht(c.balance)}</div><div class="lbl">เติมแล้ว ${baht(tu)} · ใช้ไป ${baht(sp)}</div><div class="cid">${c.id.replace(/(\d{4})(?=\d)/g,'$1 ')}</div></div>
+    <div class="card" style="margin-top:12px"><div class="mut">ส่งรหัสนี้ให้แอดมินเพื่อเติมเงิน</div><div class="idbox">${c.id}</div><button class="btn" data-a="copyid">คัดลอกรหัสบัญชี</button></div>
+    <h2 style="margin-top:16px">รายการล่าสุด</h2><div class="card">${ledgerHtml(c)}</div>`;
+  }else{
+    const os=S.orders.filter(o=>o.cid===c.id);
+    h+=`<h2>บัญชีของฉัน</h2><div class="card"><div class="mut">รหัสบัญชี (สร้างอัตโนมัติ)</div><div class="idbox">${c.id}</div><button class="btn alt" data-a="copyid">คัดลอกรหัส</button><p class="mut">สร้างเมื่อ ${dt(c.created)}</p></div>
+    <h2 style="margin-top:16px">คำสั่งซื้อ</h2><div class="card">${os.map(o=>`<div class="row"><div><b>${o.id}</b><div class="mut">${dt(o.at)} · ${o.items.map(i=>esc(i.name)+'×'+i.q).join(', ')}</div>${o.items.some(i=>i.codes)?`<button class="btn alt" style="padding:7px;width:auto;margin-top:6px" data-a="showcodes" data-id="${o.id}">ดูรหัสที่ได้รับ</button>`:''}</div><b>${baht(o.total)}</b></div>`).join('')||'<p class="mut">ยังไม่มีคำสั่งซื้อ</p>'}</div>`;
+  }
+  h+='</main><nav>'+[['home','หน้าแรก'],['cart','ตะกร้า'],['wallet','Wallet'],['account','บัญชี']].map(x=>`<button class="${view===x[0]||(view==='prod'&&x[0]==='home')?'on':''}" data-a="nav" data-id="${x[0]}"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${IC[x[0]]}</svg>${x[0]==='cart'&&tt.n?`<em class="${tt.n!==lastN?'pop':''}">${tt.n}</em>`:''}</i>${x[1]}</button>`).join('')+'</nav>';lastN=tt.n;
+  $('#app').className=go?'go':'';$('#app').innerHTML=h;theme();countBal(c.balance);
+}
+function showCodes(oid){const o=S.orders.find(x=>x.id===oid);if(!o)return;dlg('<h3>รหัสที่ได้รับ · '+o.id+'</h3><p class="mut">เก็บรหัสไว้ให้ดี ดูซ้ำได้ที่หน้า "บัญชี"</p>'+o.items.filter(i=>i.codes).map(i=>'<div class="card" style="margin-bottom:10px"><b>'+esc(i.name)+'</b>'+i.codes.map(c=>'<div class="row"><span style="font-family:ui-monospace,monospace;word-break:break-all">'+esc(c)+'</span><button class="btn alt" style="width:auto;margin:0;padding:6px 10px" data-a="copycode" data-code="'+esc(c)+'">คัดลอก</button></div>').join('')+'</div>').join('')+'<button class="btn" data-a="close">ปิด</button>')}
+function checkout(){const c=me(),cart=cartOf(),items=[];let t=0;
+  for(const id in cart){const p=prod(id),q=cart[id];if(!p||!p.on||q<1)continue;if(p.stock<q)return toast('"'+p.name+'" เหลือไม่พอ');items.push({id,name:p.name,unit:pr(p),q});t+=pr(p)*q}
+  if(!items.length)return toast('ตะกร้าว่าง');
+  if(c.balance<t)return toast('ยอดเงินไม่พอ ต้องเติมเงินก่อน');
+  const oid='OD'+Date.now().toString(36).toUpperCase();
+  post(c,'PURCHASE_DEBIT','DR',t,{ref:oid,actor:'customer'});
+  items.forEach(i=>{const q=prod(i.id);if(q.digital){i.codes=q.codes.splice(0,i.q);q.stock=q.codes.length}else q.stock-=i.q});
+  S.orders.unshift({id:oid,cid:c.id,items,total:t,at:Date.now(),status:'Paid'});
+  S.carts[c.id]={};save();view='account';render();toast('ซื้อสำเร็จ '+oid);if(items.some(i=>i.codes))showCodes(oid)}
+
+async function hp(pin,salt){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(salt+pin));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+function gate(){
+  if(!S.admin)dlg('<h3>ตั้ง PIN แอดมิน</h3><p class="mut">ตั้งครั้งแรกครั้งเดียว ใช้เข้าแผงแอดมินในเบราว์เซอร์นี้</p><input id="p1" type="password" placeholder="PIN อย่างน้อย 6 ตัว"><input id="p2" type="password" placeholder="ยืนยัน PIN"><button class="btn" data-a="setpin">ตั้ง PIN</button><button class="btn alt" data-a="close">ยกเลิก</button>');
+  else dlg('<h3>เข้าสู่ระบบแอดมิน</h3><input id="p1" type="password" placeholder="PIN"><button class="btn" data-a="login">เข้าสู่ระบบ</button><button class="btn alt" data-a="close">ยกเลิก</button>')}
+function admin(){
+  const a=$('#adm');a.hidden=!adminOk;if(!adminOk)return;
+  const s=S.settings;let b='';
+  if(tab==='topup'){
+    const cs=Object.values(S.customers);
+    b=`<div class="card"><h3>เติมเงินให้ลูกค้า</h3><input id="tpid" inputmode="numeric" maxlength="12" placeholder="รหัสลูกค้า 12 หลัก"><input id="tpamt" inputmode="decimal" placeholder="จำนวนเงิน (บาท)"><input id="tpref" placeholder="เลขอ้างอิงการโอน / เหตุผล (จำเป็น)"><button class="btn" data-a="tpcheck">ตรวจสอบ</button></div>
+    <h2 style="margin-top:14px">ลูกค้าในเครื่องนี้</h2><div class="card">${cs.map(c=>`<div class="row"><span style="font-family:ui-monospace,monospace">${c.id}</span><b>${baht(c.balance)}</b></div>`).join('')}</div>`;
+  }else if(tab==='prod'){
+    b=`<div class="card"><h3>เพิ่มสินค้า</h3><input id="npn" placeholder="ชื่อสินค้า"><input id="npe" placeholder="อีโมจิ เช่น 🎧 (ใช้เมื่อไม่มีรูป)" maxlength="4"><label class="mut">รูปสินค้า (เลือกจากเครื่อง)</label><input id="npi" type="file" accept="image/*"><input id="npp" inputmode="decimal" placeholder="ราคา (บาท)"><textarea id="npd" rows="3" placeholder="รายละเอียดสินค้า (ไม่บังคับ)"></textarea><select id="npt"><option value="p">สินค้าทั่วไป (ใช้จำนวนสต็อก)</option><option value="d">ดิจิทัล/ของเกม (ส่งรหัสให้ทันที)</option></select><input id="nps" inputmode="numeric" placeholder="จำนวนสต็อก (สินค้าทั่วไป)"><textarea id="npc" rows="4" placeholder="สินค้าดิจิทัล: ใส่รหัส/ไอดีที่จะส่งให้ลูกค้า 1 บรรทัดต่อ 1 ชิ้น"></textarea><button class="btn" data-a="addprod">เพิ่มสินค้า</button></div>
+    <h2 style="margin-top:14px">สินค้าทั้งหมด</h2><button class="btn alt" style="margin:0 0 10px" data-a="samples">เพิ่มสินค้าตัวอย่าง (มีรูป)</button>`+S.products.map(p=>`<div class="card" style="margin-bottom:10px"><div style="display:flex;gap:10px;align-items:center">${okImg(p.img)?`<img class="thumb" src="${p.img}" alt="">`:`<span style="font-size:32px">${esc(p.emoji)}</span>`}<b>${esc(p.name)}</b>${p.on?'':' <span class="mut">(ซ่อนอยู่)</span>'}</div><label class="mut">เปลี่ยนรูป</label><input id="pi-${p.id}" type="file" accept="image/*"><textarea id="pd-${p.id}" rows="3" placeholder="รายละเอียดสินค้า">${esc(p.desc||'')}</textarea><input id="pp-${p.id}" inputmode="decimal" value="${p.price/100}" aria-label="ราคา"><input id="ps-${p.id}" inputmode="decimal" value="${p.sale!=null?p.sale/100:''}" placeholder="ราคาลด (เว้นว่าง = ไม่ลด)">${p.digital?`<div class="mut">ดิจิทัล · เหลือรหัส ${(p.codes||[]).length} ชิ้น</div><textarea id="pc-${p.id}" rows="3" placeholder="เพิ่มรหัสใหม่ 1 บรรทัดต่อ 1 รหัส"></textarea>`:`<input id="pk-${p.id}" inputmode="numeric" value="${p.stock}" aria-label="สต็อก">`}<button class="btn" data-a="saveprod" data-id="${p.id}">บันทึก</button>${okImg(p.img)?`<button class="btn alt" data-a="rmimg" data-id="${p.id}">ลบรูป</button>`:''}<button class="btn alt" data-a="togprod" data-id="${p.id}">${p.on?'ซ่อน':'แสดง'}</button><button class="btn alt" data-a="delprod" data-id="${p.id}">ลบ</button></div>`).join('');
+  }else if(tab==='set'){
+    b=`<div class="card"><h3>ตั้งค่าหน้าร้าน</h3><label class="mut">ชื่อร้าน</label><input id="sn" value="${esc(s.name)}"><label class="mut">คำโปรย</label><input id="st" value="${esc(s.tag)}"><label class="mut">สีหลัก</label><input id="sc" type="color" value="${s.color}"><label class="mut">สีพื้นหลัง</label><input id="sb" type="color" value="${s.bg||'#f2f5f7'}"><button class="btn" data-a="saveset">บันทึกและใช้ทันที</button><button class="btn alt" data-a="resetbg">ใช้พื้นหลังตามธีมเริ่มต้น</button></div>
+    <div class="card" style="margin-top:12px"><button class="btn red" data-a="wipe">ล้างข้อมูลทั้งหมดในเครื่องนี้</button></div>`;
+  }
+  a.innerHTML=`<main><div class="row" style="border:0"><h2 style="margin:0">แผงแอดมิน</h2><button class="btn alt" style="width:auto;margin:0;padding:8px 14px" data-a="exit">ออก</button></div><div class="warn">ตัวทดลองในเบราว์เซอร์: ข้อมูลและ PIN อยู่ในเครื่องนี้ ไม่ใช่ระบบหลังบ้านจริง</div><div class="tabs">${[['topup','เติมเงิน'],['prod','สินค้า'],['set','ตั้งค่า']].map(x=>`<button class="${tab===x[0]?'on':''}" data-a="tab" data-id="${x[0]}">${x[1]}</button>`).join('')}</div>${b}</main>`;
+}
+const baht2sat=v=>{const n=Math.round(parseFloat(String(v).replace(/,/g,''))*100);return Number.isFinite(n)?n:NaN};
+document.addEventListener('click',async e=>{
+  const t=e.target.closest('[data-a]');if(!t)return;const a=t.dataset.a,id=t.dataset.id,v=i=>($('#'+i)||{}).value||'';
+  if(a==='nav'){view=id;render()}
+  else if(a==='logo'&&view==='home'){const n=Date.now();taps=taps.filter(x=>n-x<4000);taps.push(n);if(taps.length>=7){taps=[];gate()}}
+  else if(a==='add'){const p=prod(id),c=cartOf();if(p&&(c[id]||0)<p.stock){c[id]=(c[id]||0)+1;save();render();toast('เพิ่มแล้ว')}else toast('เกินสต็อก')}
+  else if(a==='inc'){const p=prod(id),c=cartOf();if(c[id]<p.stock)c[id]++;else toast('เกินสต็อก');save();render()}
+  else if(a==='dec'){const c=cartOf();if(--c[id]<1)delete c[id];save();render()}
+  else if(a==='checkout'){t.disabled=true;checkout()}
+  else if(a==='copyid')copy(me().id);
+  else if(a==='open'){curP=id;view='prod';scrollTo(0,0);render()}
+  else if(a==='back'){view='home';render()}
+  else if(a==='buynow'){const p=prod(id),c=cartOf();if(p&&!(c[id]>0)&&p.stock>0)c[id]=1;if(c[id]>0){save();view='cart';scrollTo(0,0);render()}else toast('สินค้าหมด')}
+  else if(a==='close')closeDlg();
+  else if(a==='copycode')copy(t.dataset.code,'คัดลอกรหัสสินค้าแล้ว');
+  else if(a==='showcodes')showCodes(id);
+  else if(a==='setpin'){const p=v('p1');if(p.length<6)return toast('PIN ต้องมีอย่างน้อย 6 ตัว');if(p!==v('p2'))return toast('PIN ไม่ตรงกัน');const salt=uid();S.admin={salt,hash:await hp(p,salt),fails:0,lock:0};save();adminOk=true;closeDlg();admin()}
+  else if(a==='login'){const ad=S.admin,n=Date.now();if(ad.lock>n)return toast('ลองใหม่ใน '+Math.ceil((ad.lock-n)/1000)+' วินาที');
+    if(await hp(v('p1'),ad.salt)===ad.hash){ad.fails=0;save();adminOk=true;closeDlg();admin()}else{ad.fails++;if(ad.fails>=5){ad.lock=n+30000;ad.fails=0}save();toast('PIN ไม่ถูกต้อง')}}
+  else if(a==='exit'){adminOk=false;admin();render()}
+  else if(a==='tab'){tab=id;admin()}
+  else if(a==='tpcheck'){const cid=v('tpid').trim(),amt=baht2sat(v('tpamt')),ref=v('tpref').trim(),c=S.customers[cid];
+    if(!/^\d{12}$/.test(cid))return toast('รหัสต้องเป็นตัวเลข 12 หลัก');if(!c)return toast('ไม่พบรหัสนี้ในเครื่องนี้');
+    if(!(amt>0)||amt>100000000)return toast('จำนวนเงินไม่ถูกต้อง');if(!ref)return toast('ต้องกรอกเลขอ้างอิง/เหตุผล');
+    pending=uid();dlg(`<h3>ยืนยันการเติมเงิน</h3><div class="row"><span>ลูกค้า</span><b>${cid}</b></div><div class="row"><span>ยอดปัจจุบัน</span><b>${baht(c.balance)}</b></div><div class="row"><span>เติม</span><b class="cr">+${baht(amt)}</b></div><div class="row"><span>อ้างอิง</span><b>${esc(ref)}</b></div><button class="btn" data-a="tpdo" data-id="${cid}" data-amt="${amt}" data-ref="${esc(ref)}">ยืนยันเติมเงิน</button><button class="btn alt" data-a="close">ยกเลิก</button>`)}
+  else if(a==='tpdo'){if(!pending)return;pending=null;closeDlg();const c=S.customers[id];post(c,'TOPUP_CREDIT','CR',parseInt(t.dataset.amt,10),{ref:t.dataset.ref,reason:t.dataset.ref,actor:'admin'});save();admin();render();toast('เติมเงินเรียบร้อย')}
+  else if(a==='addprod'){const n=v('npn').trim(),p=baht2sat(v('npp')),dg=v('npt')==='d',codes=dg?parseCodes(v('npc')):[],k=dg?codes.length:parseInt(v('nps'),10);if(!n||!(p>0)||!(k>=0))return toast('กรอกชื่อ ราคา และสต็อกให้ถูกต้อง');if(dg&&!codes.length)return toast('ใส่รหัสสินค้าอย่างน้อย 1 บรรทัด');let img=null;const f=$('#npi')&&$('#npi').files[0];if(f){try{img=await shrink(f)}catch(er){return toast(er.message)}}S.products.unshift({id:uid(),name:n.slice(0,60),emoji:(v('npe')||'📦').slice(0,4),price:p,sale:null,stock:k,on:true,img,digital:dg,codes,desc:v('npd').trim().slice(0,1000)});save();admin();render();toast('เพิ่มสินค้าแล้ว')}
+  else if(a==='saveprod'){const p=prod(id),pz=baht2sat(v('pp-'+id)),sv=v('ps-'+id).trim(),sl=sv?baht2sat(sv):null,k=p.digital?0:parseInt(v('pk-'+id),10);
+    if(!(pz>0)||!(k>=0)||(sv&&!(sl>=0&&sl<pz)))return toast('ตรวจราคา/ราคาลด/สต็อกอีกครั้ง');const f=$('#pi-'+id)&&$('#pi-'+id).files[0];if(f){try{p.img=await shrink(f)}catch(er){return toast(er.message)}}p.desc=v('pd-'+id).trim().slice(0,1000);p.price=pz;p.sale=sl;if(p.digital){p.codes=[...(p.codes||[]),...parseCodes(v('pc-'+id))];p.stock=p.codes.length}else p.stock=k;save();admin();render();toast('บันทึกแล้ว')}
+  else if(a==='rmimg'){const p=prod(id);delete p.img;save();admin();render()}
+  else if(a==='samples'){SAMPLES().forEach(x=>S.products.push(x));save();admin();render();toast('เพิ่มสินค้าตัวอย่างแล้ว')}
+  else if(a==='togprod'){const p=prod(id);p.on=!p.on;save();admin();render()}
+  else if(a==='delprod'){S.products=S.products.filter(p=>p.id!==id);save();admin();render()}
+  else if(a==='saveset'){const c=v('sc'),b=v('sb'),hx=/^#[0-9a-f]{6}$/i;if(!hx.test(c)||!hx.test(b))return toast('สีไม่ถูกต้อง');S.settings={name:v('sn').trim().slice(0,40)||'ร้านทดลอง',tag:v('st').slice(0,100),color:c,bg:b};save();render();admin();toast('บันทึกแล้ว')}
+  else if(a==='resetbg'){S.settings.bg='';save();render();admin()}
+  else if(a==='wipe'){dlg('<h3>ล้างข้อมูลทั้งหมด?</h3><p class="mut">บัญชีลูกค้า ยอดเงิน คำสั่งซื้อ และ PIN แอดมินจะหายถาวร</p><button class="btn red" data-a="wipego">ล้างข้อมูล</button><button class="btn alt" data-a="close">ยกเลิก</button>')}
+  else if(a==='wipego'){try{localStorage.removeItem(KEY)}catch(e){}S=seed();adminOk=false;closeDlg();admin();view='home';render()}
+});
+me();save();render();
+</script>
+</body>
+</html>
